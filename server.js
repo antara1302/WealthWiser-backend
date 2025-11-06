@@ -32,7 +32,18 @@ app.use("/api/v1/dashboard", dashboardRoutes);
 app.use("/api/v1", newsRoute);
 app.use("/api/v1", askRoute)
 
-const PORT = process.env.PORT || 5000;
+
+app.get("/api/v1/debug-env", (req, res) => {
+  res.json({
+    mongoURI: !!process.env.MONGO_URI,
+    jwtSecret: !!process.env.JWT_SECRET,
+    geminiKey: !!process.env.GEMINI_API_KEY,
+    nodeEnv: process.env.NODE_ENV
+  });
+});
+
+
+//const PORT = process.env.PORT || 5000;
 // app.listen(PORT, () => {
 //     console.log(`Server is running on port ${PORT}`);
 // });
